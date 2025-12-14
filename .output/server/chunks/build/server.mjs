@@ -387,22 +387,252 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-BijNxrxP.mjs')
+    component: () => import('./index-DDaLcEIy.mjs')
+  },
+  {
+    name: "exams-id",
+    path: "/exams/:id()",
+    component: () => import('./_id_-DVBQ9ZjS.mjs')
+  },
+  {
+    name: "exams",
+    path: "/exams",
+    component: () => import('./index-nCAz6zxM.mjs')
+  },
+  {
+    name: "classes-id",
+    path: "/classes/:id()",
+    component: () => import('./_id_-CA9KLfnx.mjs')
+  },
+  {
+    name: "exams-create",
+    path: "/exams/create",
+    component: () => import('./create-DnrEvCi2.mjs')
+  },
+  {
+    name: "grades-entry",
+    path: "/grades/entry",
+    component: () => import('./entry-Dz28O1jC.mjs')
+  },
+  {
+    name: "grades",
+    path: "/grades",
+    component: () => import('./index-B3MWo10t.mjs')
   },
   {
     name: "students-new",
     path: "/students/new",
-    component: () => import('./new-anqtthsH.mjs')
+    component: () => import('./new-C8AFtGfN.mjs')
+  },
+  {
+    name: "classes",
+    path: "/classes",
+    component: () => import('./index-CLMH5Qqh.mjs')
+  },
+  {
+    name: "exams-reports",
+    path: "/exams/reports",
+    component: () => import('./reports-D90eCIBj.mjs')
+  },
+  {
+    name: "parents",
+    path: "/parents",
+    component: () => import('./index-UhO_6q9T.mjs')
+  },
+  {
+    name: "profile",
+    path: "/profile",
+    component: () => import('./index-CWnAFepe.mjs')
+  },
+  {
+    name: "reports",
+    path: "/reports",
+    component: () => import('./index-DiPvYzXV.mjs')
   },
   {
     name: "students-id",
     path: "/students/:id()",
-    component: () => import('./_id_-B0AOftPw.mjs')
+    component: () => import('./_id_-D1ARNo1f.mjs')
+  },
+  {
+    name: "teachers-id",
+    path: "/teachers/:id()",
+    component: () => import('./_id_-BC6KsiFu.mjs')
+  },
+  {
+    name: "classes-create",
+    path: "/classes/create",
+    component: () => import('./create-BUJQdlnh.mjs')
+  },
+  {
+    name: "grades-reports",
+    path: "/grades/reports",
+    component: () => import('./reports-BliJ11EQ.mjs')
+  },
+  {
+    name: "payments",
+    path: "/payments",
+    component: () => import('./index-DwGgs5eA.mjs')
+  },
+  {
+    name: "reports-grades",
+    path: "/reports/grades",
+    component: () => import('./grades-DinSvS01.mjs')
   },
   {
     name: "students",
     path: "/students",
-    component: () => import('./index-BlQb0ifm.mjs')
+    component: () => import('./index-BaHsOEeu.mjs')
+  },
+  {
+    name: "subjects",
+    path: "/subjects",
+    component: () => import('./index-CqI8voxz.mjs')
+  },
+  {
+    name: "teachers",
+    path: "/teachers",
+    component: () => import('./index-g3rBfIZC.mjs')
+  },
+  {
+    name: "attendance-mark",
+    path: "/attendance/mark",
+    component: () => import('./mark-BlP3h_pa.mjs')
+  },
+  {
+    name: "payments-create",
+    path: "/payments/create",
+    component: () => import('./create--K5Nm40Z.mjs')
+  },
+  {
+    name: "students-create",
+    path: "/students/create",
+    component: () => import('./create-D4JYCZ5p.mjs')
+  },
+  {
+    name: "subjects-create",
+    path: "/subjects/create",
+    component: () => import('./create-gABZLtPW.mjs')
+  },
+  {
+    name: "teachers-create",
+    path: "/teachers/create",
+    component: () => import('./create-fAuoA019.mjs')
+  },
+  {
+    name: "attendance",
+    path: "/attendance",
+    component: () => import('./index-BnQ9c3s5.mjs')
+  },
+  {
+    name: "classes-schedule",
+    path: "/classes/schedule",
+    component: () => import('./schedule-CDief6SP.mjs')
+  },
+  {
+    name: "payments-history",
+    path: "/payments/history",
+    component: () => import('./history-DrvFrimX.mjs')
+  },
+  {
+    name: "payments-pending",
+    path: "/payments/pending",
+    component: () => import('./pending-C_pOrMeu.mjs')
+  },
+  {
+    name: "profile-settings",
+    path: "/profile/settings",
+    component: () => import('./settings-BK80V7H2.mjs')
+  },
+  {
+    name: "reports-payments",
+    path: "/reports/payments",
+    component: () => import('./payments-BUYC3PXm.mjs')
+  },
+  {
+    name: "classes-edit-id",
+    path: "/classes/edit/:id()",
+    component: () => import('./_id_-BEeaIA5I.mjs')
+  },
+  {
+    name: "grades-class-id",
+    path: "/grades/class/:id()",
+    component: () => import('./_id_-DxXW6p1j.mjs')
+  },
+  {
+    name: "parents-dashboard",
+    path: "/parents/dashboard",
+    component: () => import('./dashboard-CbNhSW0B.mjs')
+  },
+  {
+    name: "announcements-id",
+    path: "/announcements/:id()",
+    component: () => import('./_id_-CNBuLySo.mjs')
+  },
+  {
+    name: "attendance-history",
+    path: "/attendance/history",
+    component: () => import('./history-CJ8Tk_qs.mjs')
+  },
+  {
+    name: "attendance-reports",
+    path: "/attendance/reports",
+    component: () => import('./reports-KyGclYM-.mjs')
+  },
+  {
+    name: "reports-attendance",
+    path: "/reports/attendance",
+    component: () => import('./attendance-1IwfsXep.mjs')
+  },
+  {
+    name: "students-edit-id",
+    path: "/students/edit/:id()",
+    component: () => import('./_id_-lGPO8xZz.mjs')
+  },
+  {
+    name: "subjects-edit-id",
+    path: "/subjects/edit/:id()",
+    component: () => import('./_id_-Bi9AR7cu.mjs')
+  },
+  {
+    name: "teachers-edit-id",
+    path: "/teachers/edit/:id()",
+    component: () => import('./_id_-DT2UNB84.mjs')
+  },
+  {
+    name: "announcements",
+    path: "/announcements",
+    component: () => import('./index-Bfy4YKSt.mjs')
+  },
+  {
+    name: "reports-performance",
+    path: "/reports/performance",
+    component: () => import('./performance-BT6ibHZv.mjs')
+  },
+  {
+    name: "announcements-create",
+    path: "/announcements/create",
+    component: () => import('./create-Bz3KEZum.mjs')
+  },
+  {
+    name: "parents-children-id",
+    path: "/parents/children/:id()",
+    component: () => import('./_id_-Bo0jn-87.mjs')
+  },
+  {
+    name: "payments-student-id",
+    path: "/payments/student/:id()",
+    component: () => import('./_id_-D2h9gBsa.mjs')
+  },
+  {
+    name: "announcements-edit-id",
+    path: "/announcements/edit/:id()",
+    component: () => import('./_id_-B8oIeaBY.mjs')
+  },
+  {
+    name: "students-report-card-id",
+    path: "/students/report-card/:id()",
+    component: () => import('./_id_-CWHVhZgP.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -750,7 +980,11 @@ const plugins = [
   components_plugin_z4hgvsiddfKkfXTP6M8M4zG5Cb7sGnDhcryKVM45Di4
 ];
 const layouts = {
-  default: defineAsyncComponent(() => import('./default-_9DfsRED.mjs').then((m) => m.default || m))
+  admin: defineAsyncComponent(() => import('./admin-lppymcvW.mjs').then((m) => m.default || m)),
+  auth: defineAsyncComponent(() => import('./auth-Dh5u8JlC.mjs').then((m) => m.default || m)),
+  default: defineAsyncComponent(() => import('./default-CEji7ywY.mjs').then((m) => m.default || m)),
+  parent: defineAsyncComponent(() => import('./parent-aYXvfFbK.mjs').then((m) => m.default || m)),
+  teacher: defineAsyncComponent(() => import('./teacher-xm7-j1NW.mjs').then((m) => m.default || m))
 };
 const LayoutLoader = defineComponent({
   name: "LayoutLoader",
@@ -912,7 +1146,7 @@ const _sfc_main$1 = {
     const statusMessage = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-Bak1vxy1.mjs'));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-BFcW2W-L.mjs'));
     const _Error = defineAsyncComponent(() => import('./error-500-BtfUPMDE.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
@@ -994,5 +1228,5 @@ let entry;
 }
 const entry_default = (ssrContext) => entry(ssrContext);
 
-export { LayoutMetaSymbol as L, PageRouteSymbol as P, _export_sfc as _, useRouter as a, useRuntimeConfig as b, nuxtLinkDefaults as c, entry_default as default, navigateTo as n, resolveRouteObject as r, tryUseNuxtApp as t, useNuxtApp as u };
+export { LayoutMetaSymbol as L, PageRouteSymbol as P, _export_sfc as _, useNuxtApp as a, useRuntimeConfig as b, nuxtLinkDefaults as c, entry_default as default, navigateTo as n, resolveRouteObject as r, tryUseNuxtApp as t, useRouter as u };
 //# sourceMappingURL=server.mjs.map

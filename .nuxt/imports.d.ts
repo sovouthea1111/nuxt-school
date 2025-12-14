@@ -36,4 +36,3 @@ export { useGrades } from '../composables/useGrades';
 export { useStudents } from '../composables/useStudents';
 export { useSubjects } from '../composables/useSubjects';
 export { useTeachers } from '../composables/useTeachers';
-export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';

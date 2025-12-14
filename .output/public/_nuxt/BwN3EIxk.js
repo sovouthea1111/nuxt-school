@@ -1,0 +1,1 @@
+import{_ as c,c as o,a as s,o as t}from"./DIz7m-9I.js";const a={},n={class:"card"};function r(l,e){return t(),o("section",n,[...e[0]||(e[0]=[s("h2",{class:"title"},"Class Schedule",-1),s("div",{class:"muted"},"Coming soon",-1)])])}const _=c(a,[["render",r]]);export{_ as default};
