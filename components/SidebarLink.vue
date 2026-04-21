@@ -10,11 +10,7 @@
           : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50',
     ]"
   >
-    <iconify-icon
-      :icon="icon"
-      stroke-width="1.5"
-      class="text-lg flex-shrink-0"
-    />
+    <Icon :name="icon" class="text-lg flex-shrink-0" />
     <span>{{ label }}</span>
     <span
       v-if="badge"

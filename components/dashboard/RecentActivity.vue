@@ -1,26 +1,14 @@
 <template>
-  <div
-    class="bg-white border border-gray-200 rounded-xl shadow-sm flex flex-col"
-  >
+  <div class="bg-white border border-gray-200 rounded-xl shadow-sm flex flex-col">
     <div class="px-5 py-4 border-b border-gray-100">
       <h2 class="text-base font-medium text-gray-900">Recent Activity</h2>
     </div>
     <div class="p-5 flex-1 overflow-y-auto">
       <div class="space-y-6">
-        <div
-          v-for="(item, index) in activities"
-          :key="index"
-          class="flex gap-4"
-        >
+        <div v-for="(item, index) in activities" :key="index" class="flex gap-4">
           <div class="mt-0.5 relative">
-            <div
-              class="h-8 w-8 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center"
-            >
-              <iconify-icon
-                :icon="item.icon"
-                stroke-width="1.5"
-                class="text-gray-600"
-              />
+            <div class="h-8 w-8 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center">
+              <Icon :icon="item.icon" class="text-gray-600" />
             </div>
             <div
               v-if="index < activities.length - 1"
@@ -39,6 +27,8 @@
 </template>
 
 <script setup>
+import { Icon } from '@iconify/vue'
+
 defineProps({
   activities: {
     type: Array,

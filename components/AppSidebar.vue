@@ -1,7 +1,7 @@
 <template>
   <aside class="w-64 bg-white border-r border-gray-200 flex flex-col hidden md:flex flex-shrink-0 z-20">
     <div class="h-14 flex items-center px-6 border-b border-gray-100 flex-shrink-0">
-      <span class="text-lg font-semibold tracking-tighter text-gray-900">ACAD.</span>
+      <span class="text-lg font-semibold tracking-tighter text-gray-900">Idea International School</span>
     </div>
 
     <nav
