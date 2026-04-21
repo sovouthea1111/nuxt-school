@@ -1,14 +1,10 @@
 {
+  "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "jsx": "preserve",
-    "strict": true,
-    "types": ["nuxt", "node"]
+    "types": ["node"]
   }
 }

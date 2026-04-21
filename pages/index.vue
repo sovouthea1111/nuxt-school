@@ -1,89 +1,136 @@
 <template>
-  <div class="grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
-    <section class="card">
-      <h2 class="title">Students by Grade</h2>
-      <div class="chart">
-        <div v-for="g in gradeSeries" :key="g.label" class="chart-row">
-          <div class="chart-label">{{ g.label }}</div>
-          <div class="chart-bar"><div class="chart-fill" :style="{ width: g.pct + '%' }"></div></div>
-          <div class="chart-value">{{ g.value }}</div>
-        </div>
+  <div class="max-w-7xl mx-auto space-y-6">
+    <div
+      class="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+    >
+      <div>
+        <h1 class="text-2xl font-medium tracking-tight text-gray-900">
+          Overview
+        </h1>
+        <p class="text-sm text-gray-500 mt-1">Academic Year 2023-2024</p>
       </div>
-    </section>
-    <section class="card">
-      <h2 class="title">Attendance Last 7 Days</h2>
-      <div class="chart">
-        <div v-for="d in attendanceSeries" :key="d.label" class="chart-row">
-          <div class="chart-label">{{ d.label }}</div>
-          <div class="chart-bar"><div class="chart-fill" :style="{ width: d.pct + '%' }"></div></div>
-          <div class="chart-value">{{ d.value }}%</div>
-        </div>
+      <div class="flex items-center gap-3">
+        <button
+          class="inline-flex items-center justify-center px-4 py-2 border border-gray-200 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-colors"
+        >
+          <iconify-icon
+            icon="solar:printer-linear"
+            stroke-width="1.5"
+            class="mr-2 text-lg"
+          />
+          Reports
+        </button>
+        <button
+          class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 focus:outline-none transition-colors"
+        >
+          <iconify-icon
+            icon="solar:add-circle-linear"
+            stroke-width="1.5"
+            class="mr-2 text-lg"
+          />
+          New Admission
+        </button>
       </div>
-    </section>
-    <section class="card">
-      <h2 class="title">Exam Averages by Subject</h2>
-      <div class="chart">
-        <div v-for="s in examSeries" :key="s.label" class="chart-row">
-          <div class="chart-label">{{ s.label }}</div>
-          <div class="chart-bar"><div class="chart-fill" :style="{ width: s.pct + '%' }"></div></div>
-          <div class="chart-value">{{ s.value }}</div>
-        </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <StatCard v-for="stat in stats" :key="stat.label" v-bind="stat" />
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2">
+        <TodaySchedule :schedule="schedule" />
       </div>
-    </section>
+      <RecentActivity :activities="activities" />
+    </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue'
-import { useStudents } from '~/composables/useStudents'
-import { useAttendance } from '~/composables/useAttendance'
-import { useGrades } from '~/composables/useGrades'
-const { students } = useStudents()
-const { records } = useAttendance()
-const { grades } = useGrades()
-const gradeSeries = computed(() => {
-  const m = new Map<string, number>()
-  students.value.forEach(s => m.set(s.grade, (m.get(s.grade) || 0) + 1))
-  const arr = Array.from(m.entries()).map(([label, value]) => ({ label, value }))
-  const max = Math.max(1, ...arr.map(a => a.value))
-  return arr.sort((a,b) => a.label.localeCompare(b.label)).map(a => ({ ...a, pct: Math.round((a.value / max) * 100) }))
-})
-const attendanceSeries = computed(() => {
-  const days = 7
-  const today = new Date()
-  const out: { label: string; value: number; pct: number }[] = []
-  for (let i = days - 1; i >= 0; i--) {
-    const d = new Date(today)
-    d.setDate(today.getDate() - i)
-    const key = d.toISOString().slice(0,10)
-    const dayRecords = records.value.filter(r => r.date.slice(0,10) === key)
-    const total = dayRecords.length
-    const present = dayRecords.filter(r => r.status === 'Present').length
-    const rate = total ? Math.round((present / total) * 100) : 0
-    out.push({ label: key.slice(5), value: rate, pct: rate })
-  }
-  return out
-})
-const examSeries = computed(() => {
-  const m = new Map<string, number[]>()
-  grades.value.forEach(g => {
-    const arr = m.get(g.subject) || []
-    arr.push(g.score)
-    m.set(g.subject, arr)
-  })
-  const arr = Array.from(m.entries()).map(([label, scores]) => {
-    const avg = scores.length ? Math.round(scores.reduce((a,b) => a+b, 0) / scores.length) : 0
-    return { label, value: avg }
-  })
-  return arr.sort((a,b) => b.value - a.value).map(a => ({ ...a, pct: a.value }))
-})
-</script>
+<script setup>
+import StatCard from "~/components/dashboard/StatCard.vue";
+import TodaySchedule from "~/components/dashboard/TodaySchedule.vue";
+import RecentActivity from "~/components/dashboard/RecentActivity.vue";
 
-<style scoped>
-.chart { display: grid; gap: 10px }
-.chart-row { display: grid; grid-template-columns: 120px 1fr 60px; align-items: center; gap: 10px }
-.chart-label { color: #666 }
-.chart-bar { background: #f1f3f5; height: 12px; border-radius: 6px; overflow: hidden }
-.chart-fill { background: linear-gradient(90deg,#4f46e5,#06b6d4); height: 100% }
-.chart-value { font-weight: 700 }
-</style>
+const stats = [
+  {
+    label: "Total Students",
+    value: "2,845",
+    change: "4.2%",
+    trend: "up",
+    icon: "solar:users-group-two-rounded-linear",
+  },
+  {
+    label: "Teachers",
+    value: "142",
+    change: "0.0%",
+    trend: "flat",
+    icon: "solar:user-hand-up-linear",
+  },
+  {
+    label: "Active Classes",
+    value: "86",
+    change: "2.1%",
+    trend: "up",
+    icon: "solar:book-bookmark-linear",
+  },
+  {
+    label: "Avg. Attendance",
+    value: "94.8%",
+    change: "0.3%",
+    trend: "down",
+    icon: "solar:chart-square-linear",
+  },
+];
+
+const schedule = [
+  {
+    time: "08:00 - 09:30",
+    class: "Grade 10-A",
+    subject: "Advanced Mathematics",
+    room: "Lab 302",
+    status: "Completed",
+  },
+  {
+    time: "09:45 - 11:15",
+    class: "Grade 11-B",
+    subject: "Physics",
+    room: "Room 104",
+    status: "In Progress",
+  },
+  {
+    time: "11:30 - 13:00",
+    class: "Grade 9-C",
+    subject: "World History",
+    room: "Room 201",
+    status: "Upcoming",
+  },
+  {
+    time: "14:00 - 15:30",
+    class: "Grade 12-A",
+    subject: "Computer Science",
+    room: "Lab 405",
+    status: "Upcoming",
+  },
+];
+
+const activities = [
+  {
+    icon: "solar:document-add-linear",
+    title: "Term 1 Results Published",
+    description: "Grades for all senior classes have been updated.",
+    time: "10 minutes ago",
+  },
+  {
+    icon: "solar:user-check-linear",
+    title: "New Student Enrollment",
+    description: "Sarah Jenkins enrolled in Grade 10-A.",
+    time: "2 hours ago",
+  },
+  {
+    icon: "solar:calendar-add-linear",
+    title: "Staff Meeting Scheduled",
+    description: "Monthly academic review set for Friday.",
+    time: "Yesterday",
+  },
+];
+</script>
