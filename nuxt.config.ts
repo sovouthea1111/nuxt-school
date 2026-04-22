@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/tailwind.css", "~/assets/styles.css"],
   nitro: { compatibilityDate: "2025-12-14" },
-  modules: ["@nuxtjs/tailwindcss", "@nuxt/icon"],
+  modules: ["@nuxtjs/tailwindcss", "@nuxt/icon","@vercel/speed-insights"],
   // @ts-ignore
   tailwindcss: {
     configPath: "tailwind.config.ts",
