@@ -9,50 +9,51 @@
       style="scrollbar-width: thin; scrollbar-color: #e5e7eb transparent;"
     >
       <div class="space-y-0.5">
-        <p class="px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">Overview</p>
-        <SidebarLink href="#" icon="solar:widget-linear" label="Dashboard" :active="true" />
-        <SidebarLink href="#" icon="solar:chat-round-line-linear" label="Messages" :badge="3" />
+        <p class="uppercase px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">Overview</p>
+        <SidebarLink href="/" icon="solar:widget-linear" label="Dashboard" :active="isActive('/')" />
+        <SidebarLink href="/report" icon="solar:chart-square-linear" label="Reports" :badge="3" :active="isActive('/report')" />
       </div>
 
       <div class="space-y-0.5">
-        <p class="px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">Academics</p>
-        <SidebarLink href="#" icon="solar:notebook-minimalistic-linear" label="Classes" />
-        <SidebarLink href="#" icon="solar:book-linear" label="Subjects" />
-        <SidebarLink href="#" icon="solar:calendar-linear" label="Schedule" />
-        <SidebarLink href="#" icon="solar:checklist-minimalistic-linear" label="Attendance" />
-        <SidebarLink href="#" icon="solar:document-text-linear" label="Assignments" />
-        <SidebarLink href="#" icon="solar:diploma-linear" label="Exams & Grades" />
+        <p class="uppercase px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">Academics</p>
+        <SidebarLink href="/student" icon="solar:users-group-rounded-linear" label="Students" :active="isActive('/student')" />
+        <SidebarLink href="/subject" icon="solar:notebook-minimalistic-linear" label="Subjects" :active="isActive('/subject')" />
+        <SidebarLink href="/room" icon="solar:school-linear" label="Rooms" :active="isActive('/room')" />
       </div>
 
       <div class="space-y-0.5">
-        <p class="px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">People</p>
-        <SidebarLink href="#" icon="solar:users-group-rounded-linear" label="Students" />
-        <SidebarLink href="#" icon="solar:user-id-linear" label="Teachers" />
-        <SidebarLink href="#" icon="solar:users-group-two-rounded-linear" label="Parents" />
+        <p class="uppercase px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">Administration</p>
+        <SidebarLink href="/branch" icon="solar:structure-linear" label="Branches" :active="isActive('/branch')" />
+        <SidebarLink href="/staff" icon="solar:user-id-linear" label="Staff" :active="isActive('/staff')" />
+        <SidebarLink href="/system-user" icon="solar:shield-user-linear" label="System Users" :active="isActive('/system-user')" />
       </div>
 
       <div class="space-y-0.5">
-        <p class="px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">Administration</p>
-        <SidebarLink href="#" icon="solar:user-plus-linear" label="Admissions" />
-        <SidebarLink href="#" icon="solar:library-linear" label="Library" />
-        <SidebarLink href="#" icon="solar:bus-linear" label="Transport" />
-        <SidebarLink href="#" icon="solar:box-linear" label="Inventory" />
-      </div>
-
-      <div class="space-y-0.5">
-        <p class="px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">Finance</p>
-        <SidebarLink href="#" icon="solar:wallet-linear" label="Fee Management" />
-        <SidebarLink href="#" icon="solar:calculator-linear" label="Expenses" />
+        <p class="uppercase px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">Finance & ops</p>
+        <SidebarLink href="/payment" icon="solar:bill-list-linear" label="Student Payments" :active="isActive('/payment')" />
+        <SidebarLink href="/accounting" icon="solar:wallet-money-linear" label="Accounting" :active="isActive('/accounting')" />
+        <SidebarLink href="/payroll" icon="solar:banknote-linear" label="Payroll" :active="isActive('/payroll')" />
+        <SidebarLink href="/expense" icon="solar:card-transfer-linear" label="Expenses" :active="isActive('/expense')" />
+        <SidebarLink href="/stock-control" icon="solar:box-linear" label="Stock Control" :active="isActive('/stock-control')" />
       </div>
     </nav>
 
     <div class="p-4 border-t border-gray-100 flex-shrink-0 bg-white space-y-0.5">
-      <SidebarLink href="#" icon="solar:settings-linear" label="Settings" />
+      <SidebarLink href="/settings" icon="solar:settings-linear" label="Settings" :active="isActive('/settings')" />
       <SidebarLink href="#" icon="solar:logout-2-linear" label="Log out" :danger="true" />
     </div>
   </aside>
 </template>
 
 <script setup>
+import { useRoute } from 'vue-router'
 import SidebarLink from "~/components/SidebarLink.vue";
+
+const route = useRoute()
+const isActive = (path) => {
+  if (path === '/') {
+    return route.path === '/'
+  }
+  return route.path.startsWith(path)
+}
 </script>
