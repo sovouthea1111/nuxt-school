@@ -1,6 +1,6 @@
 <template>
-  <a
-    :href="href"
+  <NuxtLink
+    :to="to"
     :class="[
       'flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-sm font-medium',
       active
@@ -18,12 +18,12 @@
     >
       {{ badge }}
     </span>
-  </a>
+  </NuxtLink>
 </template>
 
 <script setup>
 defineProps({
-  href: { type: String, default: "#" },
+  to: { type: String, default: "/" },
   icon: { type: String, required: true },
   label: { type: String, required: true },
   active: { type: Boolean, default: false },

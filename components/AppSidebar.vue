@@ -10,37 +10,37 @@
     >
       <div class="space-y-0.5">
         <p class="uppercase px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">Overview</p>
-        <SidebarLink href="/" icon="solar:widget-linear" label="Dashboard" :active="isActive('/')" />
-        <SidebarLink href="/report" icon="solar:chart-square-linear" label="Reports" :badge="3" :active="isActive('/report')" />
+        <SidebarLink to="/" icon="solar:widget-linear" label="Dashboard" :active="isActive('/')" />
+        <SidebarLink to="/report" icon="solar:chart-square-linear" label="Reports" :badge="3" :active="isActive('/report')" />
       </div>
 
       <div class="space-y-0.5">
         <p class="uppercase px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">Academics</p>
-        <SidebarLink href="/student" icon="solar:users-group-rounded-linear" label="Students" :active="isActive('/student')" />
-        <SidebarLink href="/subject" icon="solar:notebook-minimalistic-linear" label="Subjects" :active="isActive('/subject')" />
-        <SidebarLink href="/room" icon="solar:school-linear" label="Rooms" :active="isActive('/room')" />
+        <SidebarLink to="/student" icon="solar:users-group-rounded-linear" label="Students" :active="isActive('/student')" />
+        <SidebarLink to="/subject" icon="solar:notebook-minimalistic-linear" label="Subjects" :active="isActive('/subject')" />
+        <SidebarLink to="/room" icon="solar:school-linear" label="Rooms" :active="isActive('/room')" />
       </div>
 
       <div class="space-y-0.5">
         <p class="uppercase px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">Administration</p>
-        <SidebarLink href="/branch" icon="solar:structure-linear" label="Branches" :active="isActive('/branch')" />
-        <SidebarLink href="/staff" icon="solar:user-id-linear" label="Staff" :active="isActive('/staff')" />
-        <SidebarLink href="/system-user" icon="solar:shield-user-linear" label="System Users" :active="isActive('/system-user')" />
+        <SidebarLink to="/branch" icon="solar:structure-linear" label="Branches" :active="isActive('/branch')" />
+        <SidebarLink to="/staff" icon="solar:user-id-linear" label="Staff" :active="isActive('/staff')" />
+        <SidebarLink to="/system-user" icon="solar:shield-user-linear" label="System Users" :active="isActive('/system-user')" />
       </div>
 
       <div class="space-y-0.5">
         <p class="uppercase px-3 mb-2 text-xs font-medium text-gray-400 tracking-wider">Finance & ops</p>
-        <SidebarLink href="/payment" icon="solar:bill-list-linear" label="Student Payments" :active="isActive('/payment')" />
-        <SidebarLink href="/accounting" icon="solar:wallet-money-linear" label="Accounting" :active="isActive('/accounting')" />
-        <SidebarLink href="/payroll" icon="solar:banknote-linear" label="Payroll" :active="isActive('/payroll')" />
-        <SidebarLink href="/expense" icon="solar:card-transfer-linear" label="Expenses" :active="isActive('/expense')" />
-        <SidebarLink href="/stock-control" icon="solar:box-linear" label="Stock Control" :active="isActive('/stock-control')" />
+        <SidebarLink to="/payment" icon="solar:bill-list-linear" label="Student Payments" :active="isActive('/payment')" />
+        <SidebarLink to="/accounting" icon="solar:wallet-money-linear" label="Accounting" :active="isActive('/accounting')" />
+        <SidebarLink to="/payroll" icon="solar:banknote-linear" label="Payroll" :active="isActive('/payroll')" />
+        <SidebarLink to="/expense" icon="solar:card-transfer-linear" label="Expenses" :active="isActive('/expense')" />
+        <SidebarLink to="/stock-control" icon="solar:box-linear" label="Stock Control" :active="isActive('/stock-control')" />
       </div>
     </nav>
 
     <div class="p-4 border-t border-gray-100 flex-shrink-0 bg-white space-y-0.5">
-      <SidebarLink href="/settings" icon="solar:settings-linear" label="Settings" :active="isActive('/settings')" />
-      <SidebarLink href="#" icon="solar:logout-2-linear" label="Log out" :danger="true" />
+      <SidebarLink to="/settings" icon="solar:settings-linear" label="Settings" :active="isActive('/settings')" />
+      <SidebarLink to="#" icon="solar:logout-2-linear" label="Log out" :danger="true" />
     </div>
   </aside>
 </template>
