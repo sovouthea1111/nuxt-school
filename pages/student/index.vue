@@ -18,13 +18,21 @@
         @toggle-select="toggleSelect"
         @action="onRowAction"
       >
-        <template #actions="{ row }">
+         <template #actions="{ row }">
           <div class="flex items-center justify-end gap-1">
-            <button class="p-1.5 text-gray-400 hover:text-slate-900" @click.stop="openEdit(row)">
-              <i data-lucide="pencil" stroke-width="1.5" class="w-4 h-4"></i>
+            <button
+              class="p-1.5 text-gray-400 hover:text-slate-900 hover:bg-gray-100 rounded transition-colors"
+              title="Edit"
+              @click.stop="openEdit(row)"
+            >
+              <Pencil class="w-4 h-4" :stroke-width="1.5" />
             </button>
-            <button class="p-1.5 text-gray-400 hover:text-rose-600" @click.stop="openDelete(row)">
-              <i data-lucide="trash-2" stroke-width="1.5" class="w-4 h-4"></i>
+            <button
+              class="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded transition-colors"
+              title="Delete"
+              @click.stop="openDelete(row)"
+            >
+              <Trash2 class="w-4 h-4" :stroke-width="1.5" />
             </button>
           </div>
         </template>
@@ -48,6 +56,7 @@
 
 <script setup>
 import { ref, computed, onMounted, nextTick } from 'vue'
+import { Pencil, Trash2 } from 'lucide-vue-next'
 import GroupHeader from '~/components/GroupHeader.vue'
 import StudentFormModal from '~/pages/student/StudentFormModal.vue'
 import DeleteConfirmModal from '~/components/DeleteConfirmModal.vue'

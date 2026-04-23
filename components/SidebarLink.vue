@@ -10,7 +10,7 @@
           : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50',
     ]"
   >
-    <Icon :name="icon" class="text-lg flex-shrink-0" />
+    <component :is="icon" class="w-4 h-4 flex-shrink-0" :stroke-width="1.5" />
     <span>{{ label }}</span>
     <span
       v-if="badge"
@@ -24,7 +24,7 @@
 <script setup>
 defineProps({
   to: { type: String, default: "/" },
-  icon: { type: String, required: true },
+  icon: { type: Object, required: true },
   label: { type: String, required: true },
   active: { type: Boolean, default: false },
   danger: { type: Boolean, default: false },

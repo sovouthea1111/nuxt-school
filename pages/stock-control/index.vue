@@ -8,19 +8,21 @@
       />
 
       <DataTable :data="stocks" :columns="stockColumns">
-        <template #actions="{ row }">
-          <div class="flex items-center justify-end gap-2">
+         <template #actions="{ row }">
+          <div class="flex items-center justify-end gap-1">
             <button
-              class="px-3 py-1 text-xs bg-slate-100 text-slate-600 rounded hover:bg-slate-200"
+              class="p-1.5 text-gray-400 hover:text-slate-900 hover:bg-gray-100 rounded transition-colors"
+              title="Edit"
               @click.stop="openEdit(row)"
             >
-              Update Stock
+              <Pencil class="w-4 h-4" :stroke-width="1.5" />
             </button>
             <button
-              class="p-1.5 text-gray-400 hover:text-rose-600"
-              @click.stop="confirmDelete(row)"
+              class="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded transition-colors"
+              title="Delete"
+              @click.stop="openDelete(row)"
             >
-              <i data-lucide="trash-2" class="w-4 h-4"></i>
+              <Trash2 class="w-4 h-4" :stroke-width="1.5" />
             </button>
           </div>
         </template>
@@ -37,6 +39,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { Pencil, Trash2 } from "lucide-vue-next";
 import StockFormModal from "~/pages/stock-control/StockFormModal.vue";
 import GroupHeader from "~/components/GroupHeader.vue";
 import DataTable from "~/components/DataTable.vue";

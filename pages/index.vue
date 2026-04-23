@@ -11,23 +11,15 @@
       </div>
       <div class="flex items-center gap-3">
         <button
-          class="inline-flex items-center justify-center px-4 py-2 border border-gray-200 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none transition-colors"
+          class="inline-flex items-center justify-center gap-2 px-4 py-2 border border-gray-200 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
         >
-          <iconify-icon
-            icon="solar:printer-linear"
-            stroke-width="1.5"
-            class="mr-2 text-lg"
-          />
+          <Printer class="w-4 h-4" :stroke-width="1.5" />
           Reports
         </button>
         <button
-          class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 focus:outline-none transition-colors"
+          class="inline-flex items-center justify-center gap-2 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 transition-colors"
         >
-          <iconify-icon
-            icon="solar:add-circle-linear"
-            stroke-width="1.5"
-            class="mr-2 text-lg"
-          />
+          <PlusCircle class="w-4 h-4" :stroke-width="1.5" />
           New Admission
         </button>
       </div>
@@ -47,6 +39,17 @@
 </template>
 
 <script setup>
+import {
+  Printer,
+  PlusCircle,
+  Users,
+  HandMetal,
+  BookMarked,
+  BarChart2,
+  FilePlus,
+  UserCheck,
+  CalendarPlus,
+} from "lucide-vue-next";
 import StatCard from "~/components/dashboard/StatCard.vue";
 import TodaySchedule from "~/components/dashboard/TodaySchedule.vue";
 import RecentActivity from "~/components/dashboard/RecentActivity.vue";
@@ -57,28 +60,28 @@ const stats = [
     value: "2,845",
     change: "4.2%",
     trend: "up",
-    icon: "solar:users-group-two-rounded-linear",
+    icon: Users,
   },
   {
     label: "Teachers",
     value: "142",
     change: "0.0%",
     trend: "flat",
-    icon: "solar:user-hand-up-linear",
+    icon: HandMetal,
   },
   {
     label: "Active Classes",
     value: "86",
     change: "2.1%",
     trend: "up",
-    icon: "solar:book-bookmark-linear",
+    icon: BookMarked,
   },
   {
     label: "Avg. Attendance",
     value: "94.8%",
     change: "0.3%",
     trend: "down",
-    icon: "solar:chart-square-linear",
+    icon: BarChart2,
   },
 ];
 
@@ -115,19 +118,19 @@ const schedule = [
 
 const activities = [
   {
-    icon: "solar:document-add-linear",
+    icon: FilePlus,
     title: "Term 1 Results Published",
     description: "Grades for all senior classes have been updated.",
     time: "10 minutes ago",
   },
   {
-    icon: "solar:user-check-linear",
+    icon: UserCheck,
     title: "New Student Enrollment",
     description: "Sarah Jenkins enrolled in Grade 10-A.",
     time: "2 hours ago",
   },
   {
-    icon: "solar:calendar-add-linear",
+    icon: CalendarPlus,
     title: "Staff Meeting Scheduled",
     description: "Monthly academic review set for Friday.",
     time: "Yesterday",

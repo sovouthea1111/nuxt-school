@@ -10,45 +10,31 @@
       <button
         type="button"
         class="flex items-center gap-2 px-4 py-2 border border-gray-200 text-slate-900 bg-white rounded-md text-base font-medium hover:bg-gray-50 transition-colors"
-        @click="handleFilter"
+        @click="$emit('filter')"
       >
-        <i data-lucide="filter" class="w-4 h-4 pointer-events-none"></i>
+        <Filter class="w-4 h-4" :stroke-width="1.5" />
         <span>Filter</span>
       </button>
 
       <button
         type="button"
         class="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-md text-base font-medium hover:bg-slate-800 transition-colors shadow-sm"
-        @click="handleNewClass"
+        @click="$emit('new-class')"
       >
-        <i data-lucide="plus" class="w-4 h-4 pointer-events-none"></i>
-        <span>New {{ title.toLowerCase() }}</span>
+        <Plus class="w-4 h-4" :stroke-width="1.5" />
+        <span>New {{ title }}</span>
       </button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, nextTick } from "vue";
+import { Filter, Plus } from "lucide-vue-next";
 
-const props = defineProps({
-  title: { type: String, default: "Classes" },
+defineProps({
+  title:       { type: String, default: "Classes" },
   description: { type: String, default: "Manage your academic units." },
 });
 
-const emit = defineEmits(["filter", "new-class"]);
-
-function handleFilter() {
-  emit("filter");
-}
-
-function handleNewClass() {
-  emit("new-class");
-}
-
-onMounted(() => {
-  nextTick(() => {
-    if (window.lucide) window.lucide.createIcons();
-  });
-});
+defineEmits(["filter", "new-class"]);
 </script>

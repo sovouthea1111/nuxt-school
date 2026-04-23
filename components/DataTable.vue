@@ -41,7 +41,9 @@
               {{ col.label }}
             </th>
 
-            <th v-if="showActions" class="px-6 py-4" />
+            <th v-if="showActions" class="px-6 py-4 font-medium text-gray-600 text-right">
+              Actions
+            </th>
           </tr>
         </thead>
 
@@ -62,7 +64,7 @@
               <slot :name="`cell-${col.key}`" v-bind="slotProps" />
             </template>
 
-            <template v-if="$slots.actions" #actions="slotProps">
+            <template #actions="slotProps">
               <slot name="actions" v-bind="slotProps" />
             </template>
           </TableRow>

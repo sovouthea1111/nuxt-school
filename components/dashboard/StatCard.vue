@@ -5,15 +5,28 @@
     <div class="flex justify-between items-start">
       <p class="text-sm font-medium text-gray-500">{{ label }}</p>
       <div class="p-2 bg-gray-50 rounded-lg">
-        <Icon :icon="icon" class="text-gray-700 text-lg" />
+        <component
+          :is="icon"
+          class="w-4 h-4 text-gray-700"
+          :stroke-width="1.5"
+        />
       </div>
     </div>
     <div class="mt-4 flex items-baseline gap-2">
       <p class="text-2xl font-medium tracking-tight text-gray-900">
         {{ value }}
       </p>
-      <span class="text-xs font-medium text-gray-500 flex items-center">
-        <Icon :icon="trendIcon" class="mr-0.5" />
+      <span
+        class="text-xs font-medium flex items-center gap-0.5"
+        :class="
+          trend === 'up'
+            ? 'text-emerald-600'
+            : trend === 'down'
+              ? 'text-rose-500'
+              : 'text-gray-500'
+        "
+      >
+        <component :is="trendIcon" class="w-3 h-3" :stroke-width="2" />
         {{ change }}
       </span>
     </div>
@@ -22,19 +35,19 @@
 
 <script setup>
 import { computed } from "vue";
-import { Icon } from "@iconify/vue";
+import { TrendingUp, TrendingDown, Minus } from "lucide-vue-next";
 
 const props = defineProps({
   label: { type: String, required: true },
   value: { type: [String, Number], required: true },
   change: { type: String, required: true },
   trend: { type: String, default: "up" },
-  icon: { type: String, required: true },
+  icon: { type: Object, required: true },
 });
 
 const trendIcon = computed(() => {
-  if (props.trend === "up") return "solar:arrow-right-up-linear";
-  if (props.trend === "down") return "solar:arrow-right-down-linear";
-  return "solar:minus-linear";
+  if (props.trend === "up") return TrendingUp;
+  if (props.trend === "down") return TrendingDown;
+  return Minus;
 });
 </script>

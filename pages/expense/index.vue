@@ -8,19 +8,21 @@
       />
 
       <DataTable :data="expenses" :columns="columns">
-        <template #actions="{ row }">
+         <template #actions="{ row }">
           <div class="flex items-center justify-end gap-1">
             <button
-              class="p-1.5 text-gray-400 hover:text-slate-900"
+              class="p-1.5 text-gray-400 hover:text-slate-900 hover:bg-gray-100 rounded transition-colors"
+              title="Edit"
               @click.stop="openEdit(row)"
             >
-              <i data-lucide="pencil" class="w-4 h-4"></i>
+              <Pencil class="w-4 h-4" :stroke-width="1.5" />
             </button>
             <button
-              class="p-1.5 text-gray-400 hover:text-rose-600"
-              @click.stop="onDelete(row)"
+              class="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded transition-colors"
+              title="Delete"
+              @click.stop="openDelete(row)"
             >
-              <i data-lucide="trash-2" class="w-4 h-4"></i>
+              <Trash2 class="w-4 h-4" :stroke-width="1.5" />
             </button>
           </div>
         </template>
@@ -38,6 +40,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { Pencil, Trash2 } from "lucide-vue-next";
 import ExpenseFormModal from "~/pages/expense/ExpenseFormModal.vue";
 import GroupHeader from "~/components/GroupHeader.vue";
 import DataTable from "~/components/DataTable.vue";

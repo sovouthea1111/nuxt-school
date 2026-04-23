@@ -25,14 +25,14 @@
               title="Edit"
               @click.stop="openEdit(row)"
             >
-              <i data-lucide="pencil" stroke-width="1.5" class="w-4 h-4"></i>
+              <Pencil class="w-4 h-4" :stroke-width="1.5" />
             </button>
             <button
               class="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded transition-colors"
               title="Delete"
               @click.stop="openDelete(row)"
             >
-              <i data-lucide="trash-2" stroke-width="1.5" class="w-4 h-4"></i>
+              <Trash2 class="w-4 h-4" :stroke-width="1.5" />
             </button>
           </div>
         </template>
@@ -56,7 +56,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, nextTick } from "vue";
+import { ref, computed } from "vue";
+import { Pencil, Trash2 } from "lucide-vue-next";
 import GroupHeader from "~/components/GroupHeader.vue";
 import RoomFormModal from "~/pages/room/RoomFormModal.vue";
 import DeleteConfirmModal from "~/components/DeleteConfirmModal.vue";
@@ -180,10 +181,4 @@ function onDeleteConfirm() {
 function onFilter() {
   console.log("Filter triggered");
 }
-
-onMounted(() => {
-  nextTick(() => {
-    if (window.lucide) window.lucide.createIcons();
-  });
-});
 </script>

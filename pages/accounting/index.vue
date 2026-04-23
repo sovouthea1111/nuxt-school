@@ -8,35 +8,35 @@
           Accounting Journal
         </h1>
         <button
-          @click="onExport"
           class="p-2 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 shadow-sm"
+          @click="onExport"
         >
-          <i data-lucide="download" class="w-4 h-4 text-slate-600"></i>
+          <Download class="w-4 h-4 text-slate-600" :stroke-width="1.5" />
         </button>
       </div>
 
-      <div
-        class="bg-slate-900 rounded-2xl p-6 text-white flex justify-between items-center shadow-xl"
-      >
-        <div>
-          <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">
-            Net Balance
-          </p>
-          <p class="text-4xl font-bold">${{ currentBalance.toFixed(2) }}</p>
-        </div>
+      <div class="bg-slate-900 rounded-2xl p-6 text-white shadow-xl">
+        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">
+          Net Balance
+        </p>
+        <p
+          class="text-4xl font-bold mt-1"
+          :class="currentBalance >= 0 ? 'text-white' : 'text-rose-400'"
+        >
+          ${{ currentBalance.toFixed(2) }}
+        </p>
       </div>
 
       <DataTable
         :data="transactions"
-        :columns="accountingColumns"
+        :columns="columns"
         row-key="id"
         :selectable="true"
-        :show-actions="true"
       >
         <template #cell-id="{ row }">
-          <span class="font-mono text-xs text-slate-400"
-            >#{{ row.id.toString().padStart(5, "0") }}</span
-          >
+          <span class="font-mono text-xs text-slate-400">
+            #{{ row.id.toString().padStart(5, "0") }}
+          </span>
         </template>
 
         <template #cell-title="{ row }">
@@ -63,23 +63,41 @@
         </template>
 
         <template #actions="{ row }">
-          <button
-            class="p-1 text-slate-400 hover:text-slate-900"
-            @click="viewDetails(row)"
-          >
-            <i data-lucide="eye" class="w-4 h-4"></i>
-          </button>
+          <div class="flex items-center justify-end gap-1">
+            <button
+              class="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+              title="View"
+              @click.stop="openView(row)"
+            >
+              <Eye class="w-4 h-4" :stroke-width="1.5" />
+            </button>
+            <button
+              class="p-1.5 text-gray-400 hover:text-slate-900 hover:bg-gray-100 rounded transition-colors"
+              title="Export"
+              @click.stop="exportEntry(row)"
+            >
+              <Download class="w-4 h-4" :stroke-width="1.5" />
+            </button>
+          </div>
         </template>
       </DataTable>
     </div>
+
+    <AccountingViewModal
+      v-model="showView"
+      :transaction="activeTransaction"
+      @export="exportEntry"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
+import { Eye, Download } from "lucide-vue-next";
 import DataTable from "~/components/DataTable.vue";
+import AccountingViewModal from "~/pages/accounting/AccountingViewModal.vue";
 
-const accountingColumns = [
+const columns = [
   { key: "id", label: "Ref #" },
   { key: "title", label: "Transaction Details" },
   { key: "branch", label: "Branch" },
@@ -128,13 +146,90 @@ const transactions = ref([
   },
 ]);
 
-const currentBalance = computed(() => {
-  return transactions.value.reduce(
+const showView = ref(false);
+const activeTransaction = ref(null);
+
+const currentBalance = computed(() =>
+  transactions.value.reduce(
     (acc, t) => (t.type === "in" ? acc + t.amount : acc - t.amount),
     0,
-  );
-});
+  ),
+);
 
-const viewDetails = (row) => console.log("Viewing ref:", row.id);
-const onExport = () => alert("Exporting...");
+const openView = (row) => {
+  activeTransaction.value = { ...row };
+  showView.value = true;
+};
+
+const printWindow = (title, bodyHtml) => {
+  const win = window.open("", "_blank");
+  win.document.write(`
+    <html>
+      <head>
+        <title>${title}</title>
+        <style>
+          body { font-family: sans-serif; padding: 40px; color: #1e293b; }
+          h1 { font-size: 20px; margin-bottom: 4px; }
+          p { color: #64748b; font-size: 14px; margin: 0 0 24px; }
+          table { width: 100%; border-collapse: collapse; }
+          th { padding: 10px 16px; background: #f8fafc; font-size: 13px; border: 1px solid #e2e8f0; text-align: left; }
+          td { padding: 10px 16px; border: 1px solid #e2e8f0; font-size: 13px; }
+          td:first-child { font-weight: 600; background: #f8fafc; }
+        </style>
+      </head>
+      <body>
+        <h1>${title}</h1>
+        <p>Generated on ${new Date().toLocaleDateString()}</p>
+        ${bodyHtml}
+      </body>
+    </html>
+  `);
+  win.document.close();
+  win.print();
+};
+
+const exportEntry = (row) => {
+  printWindow(
+    `Transaction #${row.id.toString().padStart(5, "0")}`,
+    `
+    <table>
+      <tr><td>Ref #</td><td>#${row.id.toString().padStart(5, "0")}</td></tr>
+      <tr><td>Title</td><td>${row.title}</td></tr>
+      <tr><td>Category</td><td>${row.category}</td></tr>
+      <tr><td>Branch</td><td>${row.branch}</td></tr>
+      <tr><td>Date</td><td>${row.date}</td></tr>
+      <tr><td>Amount</td><td>${row.type === "in" ? "+" : "-"}$${row.amount.toFixed(2)}</td></tr>
+    </table>
+  `,
+  );
+};
+
+const onExport = () => {
+  printWindow(
+    "Accounting Journal",
+    `
+    <table>
+      <thead>
+        <tr><th>Ref #</th><th>Title</th><th>Category</th><th>Branch</th><th>Date</th><th>Amount</th></tr>
+      </thead>
+      <tbody>
+        ${transactions.value
+          .map(
+            (t) => `
+          <tr>
+            <td>#${t.id.toString().padStart(5, "0")}</td>
+            <td>${t.title}</td>
+            <td>${t.category}</td>
+            <td>${t.branch}</td>
+            <td>${t.date}</td>
+            <td>${t.type === "in" ? "+" : "-"}$${t.amount.toFixed(2)}</td>
+          </tr>
+        `,
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `,
+  );
+};
 </script>
